@@ -1,6 +1,4 @@
-
-
-class BookPropertyError(Exception):
-    def __init__(self, expression, message):
-        self.expression = expression
-        self.message = message
+class NonexistentProperty(Exception):
+    def __init__(self, prop):
+        self.prop = prop
+        self.message = 'The property ' + str(prop) + ' does not exist in the Library.'

@@ -2,11 +2,12 @@ from collections import OrderedDict
 from datetime import date, timedelta
 import pygsheets
 from typing import List, Tuple, Union
+import pybraryexceptions
 
 
 # worksheet is named LIB
 # colheaders are named LIBHEADERS
-class PyLibrary:
+class Pybrary:
 
     def __init__(self, authfile: str, libraryname: str, librarypage: int, permheaders: List[str], checkoutlimit: float):
         self.authfile = authfile
@@ -16,7 +17,7 @@ class PyLibrary:
         self.checkoutlimit = checkoutlimit
 
         def get_library_info():
-            gc = pygsheets.authorize(service_file=self.authfile)
+            gc = pygsheets.authorize(service_account_file=self.authfile)
             sh = gc.open(self.libraryname)
             lib = sh[self.librarypage]
             lib_headers = OrderedDict()
@@ -27,11 +28,11 @@ class PyLibrary:
             return lib, lib_headers
         self.lib, self.lib_headers = get_library_info()
 
-    def get_property_colnum(self, prop):
+    def get_property_colnum(self, prop: str) -> int:
         try:
             return self.lib_headers[prop]
         except KeyError:
-            return -1
+            raise pybraryexceptions.NonexistentProperty(prop)
 
     def get_book_row(self, booktitle):
         title_col = self.get_property_colnum('Title')

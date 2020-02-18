@@ -1,15 +1,16 @@
-from pybrary import PyLibrary
+from pybrary import Pybrary
 from iospreadsheetdata import IOSpreadsheetData
 import pygsheets
+import secretsecret
 
 
 def create_test_sheet(num_books=10):
     '''
     Creates a test sheet
     '''
-    AUTHFILE = 'libraryKeyDev.json'
-    MAINGOOGLEACCOUNT = ''
-    gc = pygsheets.authorize(service_file=AUTHFILE)
+    AUTHFILE = secretsecret.authfile()
+    MAINGOOGLEACCOUNT = secretsecret.email()
+    gc = pygsheets.authorize(service_account_file=AUTHFILE)
     test_col_titles = ['Title', 'Author', 'SUID', 'SUNet', 'Cell Phone', 'Address', 'Date Out', 'Date Due', 'Is Checked Out']
     num_titles = len(test_col_titles)
     test_books = []
@@ -36,11 +37,7 @@ def create_test_sheet(num_books=10):
 def hackyTest():
     headers = ['Title', 'Author']
     create_test_sheet()
-    testLib = PyLibrary('libraryKeyDev.json', 'testSheet', 0, headers, 2)
-    print('getPropertyColNum Tests:')
-    print(testLib.get_property_colnum('Title'))
-    print(testLib.get_property_colnum('rats'))
-    print()
+    testLib = Pybrary('libraryKeyDev.json', 'testSheet', 0, headers, 2)
     print('getBookInfo Tests:')
     print(testLib.get_book('Title 1'))
     print(testLib.get_book('Title 2'))

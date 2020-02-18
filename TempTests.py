@@ -8,7 +8,7 @@ def create_test_sheet(num_books=10):
     Creates a test sheet
     '''
     AUTHFILE = 'libraryKeyDev.json'
-    MAINGOOGLEACCOUNT = 'hector.an.amador@gmail.com'
+    MAINGOOGLEACCOUNT = ''
     gc = pygsheets.authorize(service_file=AUTHFILE)
     test_col_titles = ['Title', 'Author', 'SUID', 'SUNet', 'Cell Phone', 'Address', 'Date Out', 'Date Due', 'Is Checked Out']
     num_titles = len(test_col_titles)
@@ -62,7 +62,7 @@ def hackyTest():
     print()
     print('checkInBook Tests: ')
     testLib.check_in_book('Title 2')
-    print("Run done.")
+    print("Test run done.")
 
 
 io = IOSpreadsheetData('libraryKeyDev.json')

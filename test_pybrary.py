@@ -40,16 +40,16 @@ class TestPyLibrary(TestCase):
         self.io.delete_all_files()
         self.create_test_sheet(self.headers, num_books)
         self.pybrary = Pybrary(authfile=secretsecret.devauthfile(),
-                                 libraryname='testSheet',
-                                 librarypage=0,
-                                 permheaders=self.permheaders,
-                                 checkoutlimit=2)
+                               libraryname='testSheet',
+                               librarypage=0,
+                               permheaders=self.permheaders,
+                               checkoutlimit=2)
 
 
 class TestLibraryInfoGathering(TestPyLibrary):
     def test_PyLibrary_ExistingProperty_ReturnsPropertyColnum(self):
         existing_property = 'Title'
-        expected_col_num = idx + 1 #Columns are 1 indexed
+        expected_col_num = 1  # Columns are 1 indexed
         actual_col_num = self.pybrary.get_property_colnum(existing_property)
         self.assertEqual(expected_col_num, actual_col_num)
 

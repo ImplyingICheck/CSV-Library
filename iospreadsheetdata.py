@@ -1,5 +1,4 @@
 import pygsheets
-import secretsecret
 
 
 class IOSpreadsheetData:
